@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="Control.js"></script>
+    <title>HRT ADD PATIENT PAGE</title>
+</head>
+
+<body class = "p-5">
+   
+
+   <div class=row>
+       <!--<img  class="col p-3" src="logosmall.png" class="rounded-circle float-start" alt="Health Logo" class = "img-fluid"> --> 
+        <h2 class="col lg 10 mt-1">Patient Generation Panel At HRT Surgical Center<samp id="view"></samp></h2> 
+        <div class="container">
+            <button type="button" class="btn btn-danger col sm 1 float-end p-1" onclick="exit()">Exit</button>
+        </div>     
+        
+   </div>
+    <form action="">
+        <div class = "row p-3">
+            <div class = "col">
+                <label for="name form-lable">Patient's Name: </label>
+                <input type="text" class="form-control" placeholder="name" id="name">
+            </div>
+            <div class = "col">
+                <label for="status" class="form-label">Select Status:</label>
+                <select class="form-select" id="status" name="status">
+                  <option>Pre Opp</option>
+                  <option>Intra Opp</option>
+                  <option>Post opp</option>
+                  <option>Discharged</option>
+                </select>
+                            
+            </div>
+            <div class = "col">
+                <label for="location" class="form-label">Select Patients Location:</label>
+                <select class="form-select" id="location" name="location">
+                  <option>Pre opp room</option>
+                  <option>Theather 1</option>
+                  <option>Theather 2</option>
+                  <option>Theather 3</option>
+                  <option>Theather 4</option>
+                  <option>Ward 1 </option>
+                  <option>Ward 2 </option>
+                  <option>Ward 3 </option>
+                  <option>Ward 4 </option>
+                </select>
+            
+                
+            </div>
+        </div>
+        <div class = "row p-3">
+            <div class = "col">
+                <label for="name">Proposed Start Time: </label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class = "col">
+                <label for="name">Actual Start Time: </label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class = "col">
+                <label for="name">Surgery End Time: </label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class = "col">
+                <label for="name">Exit Time: </label>
+                <input type="text" class="form-control" id="name">
+            </div>
+        </div>
+        <div class="container">
+            <button type="button" class="btn btn-secondary" onclick="clearInput()">NEW</button>
+            <button type="button" class="btn btn-primary" onclick="saveUser()">SAVE</button>
+            <button type="button" class="btn btn-danger" onclick="deleteUser()">DELETE</button>
+            <button type="button" class="btn btn-success" onclick="deleteUser()">View Surgery List</button>
+        </div>
+
+        <table class="table table-hover  mt-3">
+            <thead class="table-success">
+              <tr>
+                <th>Patient's name</th>
+                <th>Surgery Status</th>
+                <th>Patient's Location</th>
+                <th>Proposed Start Time</th>
+                <th>Actual Start Time</th>
+                <th>Surgery End Time</th>
+                <th>Exit Time</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Solomon</td>
+                <td>Inter Operative</td>
+                <td>Theater 4</td>
+                <td>10.00am</td>
+                <td>10.10am</td>
+                <td>11.00am</td>
+                <td>4.00pm</td>
+
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+    
+</body>
+</html>
