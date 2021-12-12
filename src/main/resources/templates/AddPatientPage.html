@@ -8,7 +8,7 @@
 </head>
 
 <body class = "p-5">
-   
+   <div class="container">
 
    <div class=row>
        <!--<img  class="col p-3" src="logosmall.png" class="rounded-circle float-start" alt="Health Logo" class = "img-fluid"> --> 
@@ -18,25 +18,28 @@
         </div>     
         
    </div>
-    <form action="">
+    <form name="patient-form" id="patient-form" action="">
+        <input type="hidden" id="id" name="id">
         <div class = "row p-3">
             <div class = "col">
-                <label for="name form-lable">Patient's Name: </label>
-                <input type="text" class="form-control" placeholder="name" id="name">
+                <label for="pname form-lable">Patient's Name: </label>
+                <input type="text" class="form-control" placeholder="name" id="pname" name="pname">
             </div>
             <div class = "col">
-                <label for="status" class="form-label">Select Status:</label>
-                <select class="form-select" id="status" name="status">
-                  <option>Pre Opp</option>
-                  <option>Intra Opp</option>
-                  <option>Post opp</option>
-                  <option>Discharged</option>
+                <label for="pstatus" class="form-label">Select Status:</label>
+                <select class="form-select" id="pstatus" name="pstatus">
+                   <option class="floating-lable">Surgery Status</option> 
+                  <option value="Pre-Opp">Pre-Opp</option>
+                  <option value="Intra-Opp">Intra-Opp</option>
+                  <option value="Recovery">Recovery</option>
+                  <option value="Transfered">Transfered</option>
+                  <option value ="Discharged">Discharged</option>
                 </select>
                             
             </div>
             <div class = "col">
                 <label for="location" class="form-label">Select Patients Location:</label>
-                <select class="form-select" id="location" name="location">
+                <select class="form-select" id="location" placeholder="Patient's Location" name="plocation">
                   <option>Pre opp room</option>
                   <option>Theather 1</option>
                   <option>Theather 2</option>
@@ -53,56 +56,52 @@
         </div>
         <div class = "row p-3">
             <div class = "col">
-                <label for="name">Proposed Start Time: </label>
-                <input type="text" class="form-control" id="name">
+                <label for="pst">Proposed Start Time: </label>
+                <input type="time" class="form-control" id="pst" name="pst">
             </div>
             <div class = "col">
-                <label for="name">Actual Start Time: </label>
-                <input type="text" class="form-control" id="name">
+                <label for="ast">Actual Start Time: </label>
+                <input type="time" class="form-control" id="ast" name="ast">
             </div>
             <div class = "col">
-                <label for="name">Surgery End Time: </label>
-                <input type="text" class="form-control" id="name">
+                <label for="endT">Surgery End Time: </label>
+                <input type="time" class="form-control" id="endt" name="endT">
             </div>
             <div class = "col">
-                <label for="name">Exit Time: </label>
-                <input type="text" class="form-control" id="name">
+                <label for="exitT">Exit Time: </label>
+                <input type="time" class="form-control" id="exitT" name="exitT">
             </div>
         </div>
         <div class="container">
             <button type="button" class="btn btn-secondary" onclick="clearInput()">NEW</button>
-            <button type="button" class="btn btn-primary" onclick="saveUser()">SAVE</button>
-            <button type="button" class="btn btn-danger" onclick="deleteUser()">DELETE</button>
-            <button type="button" class="btn btn-success" onclick="deleteUser()">View Surgery List</button>
+            <button type="button" class="btn btn-primary" onclick="savePatient()">SAVE</button>
+            <button type="button" class="btn btn-danger" onclick="deletePatient()">DELETE</button>
+            <button type="button" class="btn btn-success" onclick="list(src = 'SurgeryList.html')">View Surgery List</button>
         </div>
 
         <table class="table table-hover  mt-3">
             <thead class="table-success">
               <tr>
-                <th>Patient's name</th>
-                <th>Surgery Status</th>
-                <th>Patient's Location</th>
-                <th>Proposed Start Time</th>
-                <th>Actual Start Time</th>
-                <th>Surgery End Time</th>
-                <th>Exit Time</th>
+                <th width= "40%"   >Patient's name</th>
+                <th width= "30%" >Surgery Status</th>
+                <th width= "30%" >Patient's Location</th>
+                <th width= "10%" >Proposed Start Time</th>
+                <th width= "10%">Actual Start Time</th>
+                <th width= "10%">Surgery End Time</th>
+                <th width= "10%">Exit Time</th>
                 
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>John Solomon</td>
-                <td>Inter Operative</td>
-                <td>Theater 4</td>
-                <td>10.00am</td>
-                <td>10.10am</td>
-                <td>11.00am</td>
-                <td>4.00pm</td>
-
-              </tr>
-              
+            <tbody id="table-body" style="cursor: pointer;">
+             
             </tbody>
           </table>
+
+          <script type="text/javascript">
+			var tabela = localStorage.getItem('table-body');
+			document.getElementById("table-body").innerHTML = table;
+		</script>
+
         </div>
     
 </body>

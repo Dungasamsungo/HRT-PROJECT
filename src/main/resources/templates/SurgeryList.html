@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="Control.js"></script>
+    <title>HRT Surgery List</title>
+</head>
+
+<body class = "p-5">
+        <div class="container">
+            <div class="col sm 3">
+                <img src="Logo.png" alt="HRT Logo" height = "100px">
+            </div>
+            <div class="col lg 10">
+                <h2 class = "mt-1">Patient List Panel At HRT Surgical Center<samp id="view"></samp></h2>  
+            </div>
+            
+         </div>
+
+         <script>
+             var tableTimer = setInterval(timer,1000)
+             function timer(){
+                 var d = new Date();
+                 document.getElementById("dt-time").innerHTML = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()+' '+ d.toLocaleDateString();
+
+                 var table = localStorage.getItem("table-body").innerHTML= table;
+             }
+             document.tableTimer();
+         </script>
+   
+
+    <div class=row>
+      
+                  <div class="container">
+             <button type="button" class="btn btn-danger col float-end p-1" onclick="exit()">Exit</button> 
+             <div class= container>
+                <button type="button" class="btn btn-secondary col float-end p-1" onclick= AddPatient() >Add Patient</button>
+             </div>
+             
+         </div>     
+
+
+
+    <table class="table table-hover  mt-3">
+        <thead class="table-success">
+          <tr>
+            <th>Patient's name</th>
+            <th>Surgery Status</th>
+            <th>Patient's Location</th>
+            <th>Proposed Start Time</th>
+            <th>Actual Start Time</th>
+            <th>Surgery End Time</th>
+            <th>Exit Time</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Solomon</td>
+            <td>Inter Operative</td>
+            <td>Theater 4</td>
+            <td>10.00am</td>
+            <td>10.10am</td>
+            <td>11.00am</td>
+            <td>4.00pm</td>
+
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+</body>
+</html>
