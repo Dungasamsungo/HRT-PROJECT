@@ -1,5 +1,159 @@
 
-var patients = localStorage.getItem('table-list');
+userList = [];
+function saveUser() {
+
+    id = document.getElementById("id").value;
+    pname = document.getElementById("pname").value;
+    pstatus = document.getElementById("pstatus").value;
+    plocation = document.getElementById("plocation").value;
+    pst = document.getElementById("pst").value;
+    ast = document.getElementById("ast").value;
+    endT = document.getElementById("endT").value;
+    exitT = document.getElementById("exitT").value;
+
+    url = `name=${pname}&pstatus= ${pstatus}&location=${location}&pst=${pst} 
+    $ast=${ast} &endT=${endT}&exitT=${exitT}`;
+
+    const xhttp = new XMLHttpRequest();
+    if (id == '') {
+        xhttp.open("GET", "https://localhost:8080/demo/add?" + url);
+    } else {
+        xhttp.open("PUT", "https://localhost:8080/demo/update/$" {id}?${url});
+    }
+
+    xhttp.send();
+    xhttp.onload = function () { 
+        alert(this.responseText);
+        updateUser();
+        clearInput();
+
+    }
+
+}
+
+function clearInput() {
+    document.getElementById("id").value = '';
+    document.getElementById('patient-form').reset();
+}
+
+/*function clearInput() {
+    document.getElementById("id").value = "";
+    document.getElementById("pname").value = "";
+    document.getElementById("pstatus").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("pst").value = "";
+    document.getElementById("ast").value = "";
+    document.getElementById("endT").value= "";
+    document.getElementById("exitT").value= "";*/
+
+
+function updateUser() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://localhost:8080/demo/all");
+    xhttp.send();
+    xhttp.onload = function () {
+        userList = JSON.parse(this.responseText);
+        updatePage(0);
+
+    }
+
+}
+
+function updatePage(pg) {
+
+    pageQty = userList.length / 5;
+    if (pageQty % 5 > 0) {
+        pageQty++;
+    }
+    pageQty = parseInt(pageQty);
+    if (pageQty > 1) {
+      previous = (pg == 0) ? 0 : pg - 1;
+      next = (pg ==pageQty - 1) ? pageQty -1 : pg + 1;
+        txtpage = `<li class="page-item" onclick='updatePage(${previous})'><a class="page-link" href= "#"><</a></li>`;
+        for (i = 1; i <= pageQty; i++) {
+            
+            active = ""
+            if(i-1 == pg){
+                active = "active"
+            }
+            txtpage += `<li class="page-item ${active}" onclick='updatePage(${i - 1})'><a class="page-link" href= "#">${i}</a></li>`
+            console.log(pageQty);
+        }
+        txtpage += `<li class="page-item" onclick='updatePage(${next})'><a class="page-link" href= "#">></a></li>`
+        
+        document.getElementById("pageList").innerHTML = txtpage;
+    
+    }
+
+    text = "";
+    pg = 5 * pg;
+    for (i = pg; i <= pg + 4; i++) {
+        u = userList[i];
+        // console.log(u); 
+        if (u != undefined) {
+            text += `<tr onclick='activateUser(${i})'><td>${u.id}</td><td>${u.name}</td><td>${u.email}</td></tr>`;
+        }            
+        
+    }
+    document.getElementById("tableBody").innerHTML = text;
+
+}
+
+function activateUser(i) {
+    
+    document.getElementById("id").value = u.id;
+    document.getElementById("id").value = u.id;
+    document.getElementById("pname").value = u.pname;
+    document.getElementById("pstatus").value = u.pstatus;
+    document.getElementById("location").value = u.location;
+    document.getElementById("pst").value = u.pst;
+    document.getElementById("ast").value = u.ast;
+    document.getElementById("endT").value= u.endt;
+    document.getElementById("exitT").value= u.exitT;
+
+}
+
+function deleteUser() {
+    id = document.getElementById("id").value;
+    if (id == '') {
+        alert("Select a user!");
+        return;
+    }
+    if (!confirm("Do you really want to delete this user?")) {
+        return;
+    }
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "/demo/delete/" + id);
+    xhttp.send();
+    xhttp.onload = function () {
+        alert(this.responseText);
+        updateUser();
+        clearInput();
+    }
+}
+
+function AddPatient(scr = "AddPatientPage.html")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*var patients = localStorage.getItem('table-list');
 
 if (patients = null){
     patients = [];
@@ -142,148 +296,7 @@ function deletePatient() {
             clearInput();
         }
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-/*userList = [];
-function saveUser() {
-
-    id = document.getElementById("id").value;
-    pname = document.getElementById("pname").value;
-    pstatus = document.getElementById("pstatus").value;
-    plocation = document.getElementById("plocation").value;
-    pst = document.getElementById("pst").value;
-    ast = document.getElementById("ast").value;
-    endT = document.getElementById("endT").value;
-    exitT = document.getElementById("exitT").value;
-
-    url = `name=${pname}&pstatus= ${pstatus}&location=${location}&pst=${pst} 
-    $ast=${ast} &endT=${endT}&exitT=${exitT}`;
-
-    const xhttp = new XMLHttpRequest();
-    if (id == '') {
-        xhttp.open("POST demo/add?" + url);
-    } else {
-        xhttp.open("PUT", `demo/update/${id}?${url}`);
-    }
-
-    xhttp.send();
-    xhttp.onload = function () {
-        alert(this.responseText);
-        updateUser();
-        clearInput();
-
-    }
-
-}
-
-
-function clearInput() {
-    document.getElementById("id").value = "";
-    document.getElementById("pname").value = "";
-    document.getElementById("pstatus").value = "";
-    document.getElementById("location").value = "";
-    document.getElementById("pst").value = "";
-    document.getElementById("ast").value = "";
-    document.getElementById("endT").value= "";
-    document.getElementById("exitT").value= "";
-
-
-function updateUser() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://class209.herokuapp.com/demo/all");
-    xhttp.send();
-    xhttp.onload = function () {
-        userList = JSON.parse(this.responseText);
-        updatePage(0);
-
-    }
-
-}
-
-function updatePage(pg) {
-
-    pageQty = userList.length / 5;
-    if (pageQty % 5 > 0) {
-        pageQty++;
-    }
-    pageQty = parseInt(pageQty);
-    if (pageQty > 1) {
-      previous = (pg == 0) ? 0 : pg - 1;
-      next = (pg ==pageQty - 1) ? pageQty -1 : pg + 1;
-        txtpage = `<li class="page-item" onclick='updatePage(${previous})'><a class="page-link" href= "#"><</a></li>`;
-        for (i = 1; i <= pageQty; i++) {
-            
-            active = ""
-            if(i-1 == pg){
-                active = "active"
-            }
-            txtpage += `<li class="page-item ${active}" onclick='updatePage(${i - 1})'><a class="page-link" href= "#">${i}</a></li>`
-            console.log(pageQty);
-        }
-        txtpage += `<li class="page-item" onclick='updatePage(${next})'><a class="page-link" href= "#">></a></li>`
-        
-        document.getElementById("pageList").innerHTML = txtpage;
-    
-    }
-
-    text = "";
-    pg = 5 * pg;
-    for (i = pg; i <= pg + 4; i++) {
-        u = userList[i];
-        // console.log(u); 
-        if (u != undefined) {
-            text += `<tr onclick='activateUser(${i})'><td>${u.id}</td><td>${u.name}</td><td>${u.email}</td></tr>`;
-        }            
-        
-    }
-    document.getElementById("tableBody").innerHTML = text;
-
-}
-
-function activateUser(i) {
-    
-    document.getElementById("id").value = u.id;
-    document.getElementById("id").value = u.id;
-    document.getElementById("pname").value = u.pname;
-    document.getElementById("pstatus").value = u.pstatus;
-    document.getElementById("location").value = u.location;
-    document.getElementById("pst").value = u.pst;
-    document.getElementById("ast").value = u.ast;
-    document.getElementById("endT").value= u.endt;
-    document.getElementById("exitT").value= u.exitT;
-
-}
-
-function deleteUser() {
-    id = document.getElementById("id").value;
-    if (id == '') {
-        alert("Select a user!");
-        return;
-    }
-    if (!confirm("Do you really want to delete this user?")) {
-        return;
-    }
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/demo/delete/" + id);
-    xhttp.send();
-    xhttp.onload = function () {
-        alert(this.responseText);
-        updateUser();
-        clearInput();
-    }
-}
-
-function AddPatient(scr = "AddPatientPage.html")
-
 }*/
+
+
+

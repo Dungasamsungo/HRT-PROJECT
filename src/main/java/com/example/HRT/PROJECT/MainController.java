@@ -18,35 +18,37 @@ public class MainController {
     
     private UserRepository uRepository;
 
-    @PostMapping (path="/add" )
+    @PostMapping (path ="/add" )
         public @ResponseBody String addNewUser(
-            @RequestParam String name,
-            @RequestParam String status,
-            @RequestParam String location,
-            @RequestParam Integer proposedStartTime,
-            @RequestParam Integer actualStartTime,
-            @RequestParam Integer surgeryEndTime,
-            @RequestParam Integer exitTime){
+            @RequestParam String name
+            // ,
+            // @RequestParam String status,
+            // @RequestParam String location,
+            // @RequestParam String proposedStartTime,
+            // @RequestParam String actualStartTime,
+            // @RequestParam String surgeryEndTime,
+            // @RequestParam String exitTime
+            ){
               User u = new User();
               u.setName(name);
-              u.setStatus(status);
-              u.setLocation(location);
-              u.setProposedStartTime(proposedStartTime);
-              u.setActualStartTime(actualStartTime);
-              u.setSurgeryEndTime(surgeryEndTime);
-              u.setExitTime(exitTime);
+              // u.setStatus(status);
+              // u.setLocation(location);
+              // u.setProposedStartTime(proposedStartTime);
+              // u.setActualStartTime(actualStartTime);
+              // u.setSurgeryEndTime(surgeryEndTime);
+              // u.setExitTime(exitTime);
               uRepository.save(u);
               return "Patient Saved";
 
           }
 
-    @GetMapping (path= "/all")
+    @GetMapping (path = "/all")
           public @ResponseBody Iterable<User>getAllUsers(){
               return uRepository.findAll();
           }
 
 
-    @PutMapping (path= "/update/{id}")
+    @PutMapping (path = "/update/{id}")
 
           public @ResponseBody String uddateUser(
                 @PathVariable int id, 
@@ -62,10 +64,10 @@ public class MainController {
                 u.setName(name);
                 u.setStatus(status);
                 u.setLocation(location);
-                u.setProposedStartTime(proposedStartTime);
-                u.setActualStartTime(actualStartTime);
-                u.setSurgeryEndTime(surgeryEndTime);
-                u.setExitTime(exitTime);
+                // u.setProposedStartTime(proposedStartTime);
+                // u.setActualStartTime(actualStartTime);
+                // u.setSurgeryEndTime(surgeryEndTime);
+                // u.setExitTime(exitTime);
                 uRepository.save(u);
 
             return ("Patient Updated");
